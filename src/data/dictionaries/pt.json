@@ -1,5 +1,6 @@
 {
   "navigation": {
+    "incomingShipments": "Pacotes a Caminho",
     "dashboards": "Painéis",
     "crm": "CRM",
     "analytics": "Análises",
@@ -102,5 +103,11 @@
     "menuLevel2": "Nível de Menu 2",
     "menuLevel3": "Nível de Menu 3",
     "disabledMenu": "Menu Desativado"
+  },
+  "languages": {
+    "portuguese": "Português",
+    "english": "Inglês",
+    "french": "Francês",
+    "arabic": "Árabe"
   }
 } 

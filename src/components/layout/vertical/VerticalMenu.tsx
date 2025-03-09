@@ -89,23 +89,14 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         >
           {dictionary["navigation"].dashboard}
         </MenuItem>
-        <SubMenu label={dictionary["navigation"].frontPages} icon={<i className="ri-file-copy-line" />}>
-          <MenuItem href="/front-pages/landing-page" target="_blank">
-            {dictionary["navigation"].landing}
-          </MenuItem>
-          <MenuItem href="/front-pages/pricing" target="_blank">
-            {dictionary["navigation"].pricing}
-          </MenuItem>
-          <MenuItem href="/front-pages/payment" target="_blank">
-            {dictionary["navigation"].payment}
-          </MenuItem>
-          <MenuItem href="/front-pages/checkout" target="_blank">
-            {dictionary["navigation"].checkout}
-          </MenuItem>
-          <MenuItem href="/front-pages/help-center" target="_blank">
-            {dictionary["navigation"].helpCenter}
-          </MenuItem>
-        </SubMenu>
+        <MenuItem
+          href={`/${locale}/incoming-shipments`}
+          exactMatch={false}
+          activeUrl={`/${locale}/incoming-shipments`}
+          icon={<i className="ri-truck-line" />}
+        >
+          {dictionary["navigation"].incomingShipments}
+        </MenuItem>
         <MenuSection label={dictionary["navigation"].appsPages}>
           <SubMenu label={dictionary["navigation"].eCommerce} icon={<i className="ri-shopping-bag-3-line" />}>
             <MenuItem href={`/${locale}/apps/ecommerce/dashboard`}>{dictionary["navigation"].dashboard}</MenuItem>

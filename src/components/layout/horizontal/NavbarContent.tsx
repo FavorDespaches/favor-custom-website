@@ -1,3 +1,5 @@
+'use client'
+
 // Next Imports
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
@@ -117,33 +119,33 @@ const notifications: NotificationsType[] = [
 const NavbarContent = () => {
   // Hooks
   const { isBreakpointReached } = useHorizontalNav()
-  const { lang: locale } = useParams()
+  const { lang, locale } = useParams() as { lang: Locale; locale: Locale }
 
   return (
     <div
-      className={classnames(horizontalLayoutClasses.navbarContent, 'flex items-center justify-between gap-4 is-full')}
+      className={classnames(horizontalLayoutClasses.navbarContent, "flex items-center justify-between gap-4 is-full")}
     >
-      <div className='flex items-center gap-4'>
+      <div className="flex items-center gap-4">
         <NavToggle />
         {/* Hide Logo on Smaller screens */}
         {!isBreakpointReached && (
-          <Link href={getLocalizedUrl('/', locale as Locale)}>
+          <Link href={getLocalizedUrl("/", locale as Locale)}>
             <Logo />
           </Link>
         )}
       </div>
 
-      <div className='flex items-center'>
+      <div className="flex items-center">
         <NavSearch />
-        <LanguageDropdown />
+        {/* <LanguageDropdown lang={lang} />
         <ModeDropdown />
-        <ShortcutsDropdown shortcuts={shortcuts} />
+        <ShortcutsDropdown shortcuts={shortcuts} /> */}
         <NotificationsDropdown notifications={notifications} />
         <UserDropdown />
         {/* Language Dropdown, Notification Dropdown, quick access menu dropdown, user dropdown will be placed here */}
       </div>
     </div>
-  )
+  );
 }
 
 export default NavbarContent

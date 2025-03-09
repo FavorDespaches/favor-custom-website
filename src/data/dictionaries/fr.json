@@ -1,5 +1,6 @@
 {
   "navigation": {
+    "incomingShipments": "Livraisons en cours",
     "dashboards": "Tableaux de bord",
     "crm": "GRC",
     "analytics": "Analytique",
@@ -102,5 +103,11 @@
     "menuLevel2": "Niveau menu 2",
     "menuLevel3": "Niveau menu 3",
     "disabledMenu": "Menu désactivé"
+  },
+  "languages": {
+    "portuguese": "Portugais",
+    "english": "Anglais",
+    "french": "Français",
+    "arabic": "Arabe"
   }
 }

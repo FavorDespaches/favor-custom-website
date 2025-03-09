@@ -1,18 +1,17 @@
 //MUI Imports
-import Grid from '@mui/material/Grid2'
+import Grid from "@mui/material/Grid2";
 
 //Component Imports
-import LogisticsStatisticsCard from '@views/apps/logistics/dashboard/LogisticsStatisticsCard'
-import LogisticsVehicleOverview from '@views/apps/logistics/dashboard/LogisticsVehicleOverview'
-import LogisticsShipmentStatistics from '@views/apps/logistics/dashboard/LogisticsShipmentStatistics'
-import LogisticsDeliveryPerformance from '@views/apps/logistics/dashboard/LogisticsDeliveryPerformance'
-import LogisticsDeliveryExceptions from '@views/apps/logistics/dashboard/LogisticsDeliveryExceptions'
-import LogisticsOrdersByCountries from '@/views/apps/logistics/dashboard/LogisticsOrdersByCountries'
-import LogisticsOverviewTable from '@views/apps/logistics/dashboard/LogisticsOverviewTable'
-import BrazilChoroplethMap from '@views/apps/logistics/dashboard/BrazilChoroplethMap'
+import LogisticsStatisticsCard from "@views/apps/logistics/dashboard/LogisticsStatisticsCard";
+import LogisticsVehicleOverview from "@views/apps/logistics/dashboard/LogisticsVehicleOverview";
+import LogisticsShipmentStatistics from "@views/apps/logistics/dashboard/LogisticsShipmentStatistics";
+import LogisticsDeliveryPerformance from "@views/apps/logistics/dashboard/LogisticsDeliveryPerformance";
+import LogisticsDeliveryExceptions from "@views/apps/logistics/dashboard/LogisticsDeliveryExceptions";
+import LogisticsOrdersByCountries from "@/views/apps/logistics/dashboard/LogisticsOrdersByCountries";
+import LogisticsOverviewTable from "@views/apps/logistics/dashboard/LogisticsOverviewTable";
 
 //Data Imports
-import { getLogisticsData, getStatisticsData } from '@/app/server/actions'
+import { getLogisticsData, getStatisticsData } from "@/app/server/actions";
 
 /**
  * ! If you need data using an API call, uncomment the below API code, update the `process.env.API_URL` variable in the
@@ -50,30 +49,18 @@ import { getLogisticsData, getStatisticsData } from '@/app/server/actions'
   return res.json()
 } */
 
-const LogisticsDashboard = async () => {
+const IncomingShipments = async () => {
   // Vars
-  const data = await getStatisticsData()
-  const vehicleData = await getLogisticsData()
+  const data = await getStatisticsData();
+  const vehicleData = await getLogisticsData();
 
   return (
     <Grid container spacing={6}>
       <Grid size={{ xs: 12 }}>
-        <LogisticsStatisticsCard data={data?.statsHorizontalWithBorder} />
-      </Grid>
-      <Grid size={{ xs: 12, md: 6 }}>
-        <LogisticsVehicleOverview />
-      </Grid>
-      <Grid size={{ xs: 12, md: 6 }}>
-        <LogisticsShipmentStatistics />
-      </Grid>
-      <Grid size={{ xs: 12, md: 8 }}>
-        <BrazilChoroplethMap />
-      </Grid>
-      <Grid size={{ xs: 12, md: 4 }}>
-        <LogisticsDeliveryExceptions />
+        <LogisticsOverviewTable vehicleData={vehicleData?.vehicles} />
       </Grid>
     </Grid>
   );
-}
+};
 
-export default LogisticsDashboard
+export default IncomingShipments;

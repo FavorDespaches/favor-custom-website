@@ -1,5 +1,6 @@
 {
   "navigation": {
+    "incomingShipments": "الشحنات المستلمة",
     "dashboards": "لوحات القيادة",
     "crm": "إدارة علاقات العملاء",
     "analytics": "تحليلات",
@@ -102,5 +103,11 @@
     "menuLevel2": "مستوى القائمة 2",
     "menuLevel3": "مستوى القائمة 3",
     "disabledMenu": "قائمة المعوقين"
+  },
+  "languages": {
+    "portuguese": "البرتغالية",
+    "english": "الإنجليزية",
+    "french": "الفرنسية",
+    "arabic": "العربية"
   }
 }

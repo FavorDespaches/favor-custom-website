@@ -1,11 +1,11 @@
 'use client'
 
 // React Imports
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // Next Imports
 import Link from 'next/link'
-import { useParams, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 // MUI Imports
 import IconButton from '@mui/material/IconButton'
@@ -36,25 +36,23 @@ const getLocalePath = (pathName: string, locale: string) => {
   return segments.join('/')
 }
 
-// Vars
-const languageData: LanguageDataType[] = [
-  {
-    langCode: 'en',
-    langName: 'English'
-  },
-  {
-    langCode: 'fr',
-    langName: 'French'
-  },
-  {
-    langCode: 'ar',
-    langName: 'Arabic'
-  }
-]
+// Default language names as fallback
+const defaultLanguageNames = {
+  pt: "Portuguese",
+  en: "English",
+  fr: "French",
+  ar: "Arabic"
+}
 
-const LanguageDropdown = () => {
+const LanguageDropdown = ({ lang }: { lang: Locale }) => {
   // States
   const [open, setOpen] = useState(false)
+  const [languageData, setLanguageData] = useState<LanguageDataType[]>([
+    { langCode: "pt", langName: defaultLanguageNames.pt },
+    { langCode: "en", langName: defaultLanguageNames.en },
+    { langCode: "fr", langName: defaultLanguageNames.fr },
+    { langCode: "ar", langName: defaultLanguageNames.ar }
+  ])
 
   // Refs
   const anchorRef = useRef<HTMLButtonElement>(null)
@@ -62,7 +60,29 @@ const LanguageDropdown = () => {
   // Hooks
   const pathName = usePathname()
   const { settings } = useSettings()
-  const { lang } = useParams()
+
+  // Fetch dictionary data when component mounts
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      try {
+        // Dynamically import the dictionary
+        const dictionary = await import(`@/data/dictionaries/${lang}.json`).then(module => module.default)
+        
+        if (dictionary.languages) {
+          setLanguageData([
+            { langCode: "pt", langName: dictionary.languages.portuguese || defaultLanguageNames.pt },
+            { langCode: "en", langName: dictionary.languages.english || defaultLanguageNames.en },
+            { langCode: "fr", langName: dictionary.languages.french || defaultLanguageNames.fr },
+            { langCode: "ar", langName: dictionary.languages.arabic || defaultLanguageNames.ar }
+          ])
+        }
+      } catch (error) {
+        console.error("Error loading language dictionary:", error)
+      }
+    }
+
+    fetchDictionary()
+  }, [lang])
 
   const handleClose = () => {
     setOpen(false)

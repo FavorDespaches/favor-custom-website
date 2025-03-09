@@ -41,20 +41,18 @@ const CustomThemeProvider = (props: Props) => {
 
   // Vars
   const isServer = typeof window === 'undefined'
-  let currentMode: SystemMode
+  let currentMode: SystemMode = 'light' // Always use light mode
 
   // Hooks
   const { settings } = useSettings()
   const isDark = useMedia('(prefers-color-scheme: dark)', systemMode === 'dark')
 
+  // Force light mode regardless of settings or system preferences
   if (isServer) {
-    currentMode = systemMode
+    currentMode = 'light' as SystemMode
   } else {
-    if (settings.mode === 'system') {
-      currentMode = isDark ? 'dark' : 'light'
-    } else {
-      currentMode = settings.mode as SystemMode
-    }
+    // Always use light mode regardless of settings
+    currentMode = 'light' as SystemMode
   }
 
   // Merge the primary color scheme override with the core theme

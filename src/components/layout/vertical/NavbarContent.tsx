@@ -1,18 +1,22 @@
+'use client'
+
 // Third-party Imports
 import classnames from 'classnames'
+import { useParams } from 'next/navigation'
 
 // Type Imports
-import type { ShortcutsType } from '@components/layout/shared/ShortcutsDropdown'
 import type { NotificationsType } from '@components/layout/shared/NotificationsDropdown'
+import type { ShortcutsType } from '@components/layout/shared/ShortcutsDropdown'
+import type { Locale } from '@configs/i18n'
 
 // Component Imports
-import NavToggle from './NavToggle'
-import NavSearch from '@components/layout/shared/search'
 import LanguageDropdown from '@components/layout/shared/LanguageDropdown'
 import ModeDropdown from '@components/layout/shared/ModeDropdown'
-import ShortcutsDropdown from '@components/layout/shared/ShortcutsDropdown'
 import NotificationsDropdown from '@components/layout/shared/NotificationsDropdown'
+import NavSearch from '@components/layout/shared/search'
+import ShortcutsDropdown from '@components/layout/shared/ShortcutsDropdown'
 import UserDropdown from '@components/layout/shared/UserDropdown'
+import NavToggle from './NavToggle'
 
 // Util Imports
 import { verticalLayoutClasses } from '@layouts/utils/layoutClasses'
@@ -105,21 +109,24 @@ const notifications: NotificationsType[] = [
 ]
 
 const NavbarContent = () => {
+  // Get the current language from params
+  const { lang } = useParams() as { lang: Locale };
+
   return (
-    <div className={classnames(verticalLayoutClasses.navbarContent, 'flex items-center justify-between gap-4 is-full')}>
-      <div className='flex items-center gap-[7px]'>
+    <div className={classnames(verticalLayoutClasses.navbarContent, "flex items-center justify-between gap-4 is-full")}>
+      <div className="flex items-center gap-[7px]">
         <NavToggle />
         <NavSearch />
       </div>
-      <div className='flex items-center'>
-        <LanguageDropdown />
+      <div className="flex items-center">
+        {/* <LanguageDropdown lang={lang} />
         <ModeDropdown />
-        <ShortcutsDropdown shortcuts={shortcuts} />
+        <ShortcutsDropdown shortcuts={shortcuts} /> */}
         <NotificationsDropdown notifications={notifications} />
         <UserDropdown />
       </div>
     </div>
-  )
+  );
 }
 
 export default NavbarContent

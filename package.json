@@ -51,6 +51,8 @@
     "@tiptap/starter-kit": "^2.10.4",
     "apexcharts": "3.49.0",
     "bootstrap-icons": "1.11.3",
+    "chart.js": "^4.4.8",
+    "chartjs-chart-geo": "^4.3.4",
     "classnames": "2.5.1",
     "cmdk": "1.0.4",
     "date-fns": "4.1.0",

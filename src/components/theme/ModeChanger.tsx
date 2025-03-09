@@ -20,13 +20,9 @@ const ModeChanger = ({ systemMode }: { systemMode: SystemMode }) => {
   const isDark = useMedia('(prefers-color-scheme: dark)', systemMode === 'dark')
 
   useEffect(() => {
-    if (settings.mode) {
-      if (settings.mode === 'system') {
-        setMode(isDark ? 'dark' : 'light')
-      } else {
-        setMode(settings.mode)
-      }
-    }
+    // Always set mode to light regardless of settings or system preferences
+    setMode('light')
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings.mode])
 

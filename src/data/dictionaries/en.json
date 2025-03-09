@@ -1,5 +1,6 @@
 {
   "navigation": {
+    "incomingShipments": "Incoming Shipments",
     "dashboards": "Dashboards",
     "crm": "CRM",
     "analytics": "Analytics",
@@ -102,5 +103,11 @@
     "menuLevel2": "Menu Level 2",
     "menuLevel3": "Menu Level 3",
     "disabledMenu": "Disabled Menu"
+  },
+  "languages": {
+    "portuguese": "Portuguese",
+    "english": "English",
+    "french": "French",
+    "arabic": "Arabic"
   }
 }

@@ -65,25 +65,32 @@ export const SettingsProvider = (props: Props) => {
 
   const updatedInitialSettings = {
     ...initialSettings,
-    mode: props.mode || themeConfig.mode
+    mode: 'light' as Mode // Always use light mode regardless of props or themeConfig
   }
 
   // Cookies
   const [settingsCookie, updateSettingsCookie] = useObjectCookie<Settings>(
     themeConfig.settingsCookieName,
-    JSON.stringify(props.settingsCookie) !== '{}' ? props.settingsCookie : updatedInitialSettings
+    JSON.stringify(props.settingsCookie) !== '{}' ? 
+      { ...props.settingsCookie, mode: 'light' as Mode } : // Force light mode in cookie
+      updatedInitialSettings
   )
 
   // State
   const [_settingsState, _updateSettingsState] = useState<Settings>(
-    JSON.stringify(settingsCookie) !== '{}' ? settingsCookie : updatedInitialSettings
+    JSON.stringify(settingsCookie) !== '{}' ? 
+      { ...settingsCookie, mode: 'light' as Mode } : // Force light mode in state
+      updatedInitialSettings
   )
 
   const updateSettings = (settings: Partial<Settings>, options?: UpdateSettingsOptions) => {
     const { updateCookie = true } = options || {}
 
+    // Always force light mode in any settings update
+    const updatedSettings = { ...settings, mode: 'light' as Mode }
+
     _updateSettingsState(prev => {
-      const newSettings = { ...prev, ...settings }
+      const newSettings = { ...prev, ...updatedSettings }
 
       // Update cookie if needed
       if (updateCookie) updateSettingsCookie(newSettings)
